@@ -590,6 +590,8 @@ section.active{display:block}
 .plat-q-item{display:flex;align-items:flex-start;gap:.45rem;font-size:.72rem;color:var(--text);line-height:1.4}
 .plat-q-dot{width:5px;height:5px;border-radius:50%;background:var(--pc,var(--purpleL));flex-shrink:0;margin-top:.42rem}
 .plat-disclaimer{font-size:.72rem;color:var(--dimmer);margin-top:1.5rem;padding-top:.8rem;border-top:1px solid var(--border)}
+.contact-footer{max-width:1300px;margin:3rem auto 0;padding:1.1rem 2.5rem 2.5rem;text-align:center;font-size:.78rem;color:var(--dim);line-height:1.6;border-top:1px solid var(--border)}
+.contact-footer strong{color:var(--purpleL);font-weight:700}
 
 
 /* ── Early Adopter Program ── */
@@ -2015,7 +2017,6 @@ section.active{display:block}
     <div class="cs-eyebrow">Real Stories · Real Impact · Live in Production</div>
     <h1>Digital Workers, Proven in the Field</h1>
     <p>Five customers. Across industries. One pattern — <em>Digital Workers, in production, delivering measurable outcomes.</em></p>
-    <a class="cs-deck-cta" href="https://ifs-my.sharepoint.com/:p:/r/personal/somya_kapoor_ifs_com/Documents/Microsoft%20Teams%20Chat%20Files/CCO%20All%20Hands%20Working%20Deck%20-%20July%202026.pptx?d=we934bc3d333a4b3198078f5d6422f23f&amp;csf=1&amp;web=1&amp;e=iIddir" target="_blank" rel="noopener">▸ Open the source deck</a>
   </div>
 
   <!-- Proof metrics -->
@@ -3621,6 +3622,19 @@ if (_overlay) _overlay.addEventListener('click', closeDWPanel);
 if (_dpClose) _dpClose.addEventListener('click', closeDWPanel);
 
 renderDWMatrix();
+
+// ─── CONTACT FOOTER on every section except Vision ───
+(function addContactFooters(){
+  var msg = 'For further information, please contact <strong>Nitin Verma</strong> &amp; <strong>Ann-Marie Brickner</strong>.';
+  document.querySelectorAll('section').forEach(function(sec){
+    if(sec.id === 'vision') return;
+    if(sec.querySelector(':scope > .contact-footer')) return;
+    var f = document.createElement('div');
+    f.className = 'contact-footer';
+    f.innerHTML = msg;
+    sec.appendChild(f);
+  });
+})();
 
 // ─── VISION: HZ1 WORKER EXPAND PANEL ───
 (function buildHz1Panel(){
