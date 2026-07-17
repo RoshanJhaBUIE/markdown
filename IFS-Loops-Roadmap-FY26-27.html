@@ -153,22 +153,19 @@ section.active{display:block}
 .dwm-domain-name{font-size:.78rem;font-weight:800}
 .dwm-cell{padding:.75rem .7rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:.4rem;background:var(--bg);vertical-align:top}
 .dwm-table > *:nth-last-child(-n+5){border-bottom:none}
-/* Worker chips in matrix */
-.dwm-chip{background:var(--bg2);border:1px solid var(--border);border-left:2px solid transparent;border-radius:6px;padding:.5rem .65rem;cursor:pointer;transition:all .18s;width:100%}
-.dwm-chip:hover{border-color:var(--border2);transform:translateX(2px);box-shadow:0 3px 10px rgba(0,0,0,.3)}
+/* Worker chips in matrix — bordered by delivery quarter (colour set inline) */
+.dwm-chip{border-radius:6px;padding:.5rem .65rem;cursor:pointer;transition:transform .18s,box-shadow .18s,filter .18s;width:100%}
+.dwm-chip:hover{transform:translateX(2px);box-shadow:0 3px 12px rgba(0,0,0,.35);filter:brightness(1.18)}
 .dwm-chip-name{font-size:.7rem;font-weight:700;display:block;margin-bottom:.12rem}
 .dwm-chip-role{font-size:.58rem;color:var(--dimmer)}
-/* Domain colour theming */
-.dom-fsm .dwm-domain-cell{border-left-color:var(--purple)}
-.dom-fsm .dwm-chip{border-left-color:var(--purple)}
-.dom-proc .dwm-domain-cell{border-left-color:var(--green)}
-.dom-proc .dwm-chip{border-left-color:var(--green)}
-.dom-alm .dwm-domain-cell{border-left-color:var(--amber)}
-.dom-alm .dwm-chip{border-left-color:var(--amber)}
-.dom-fin .dwm-domain-cell{border-left-color:var(--blue)}
-.dom-fin .dwm-chip{border-left-color:var(--blue)}
-.dom-proj .dwm-domain-cell{border-left-color:var(--pink)}
-.dom-proj .dwm-chip{border-left-color:var(--pink)}
+/* Domain (left column) colour theming + soft gradient */
+.dom-fsm   .dwm-domain-cell{border-left-color:#8b5cf6;background:linear-gradient(90deg,rgba(139,92,246,.16),var(--bg2) 82%)}
+.dom-fsmcx .dwm-domain-cell{border-left-color:#22d3ee;background:linear-gradient(90deg,rgba(34,211,238,.16),var(--bg2) 82%)}
+.dom-proc  .dwm-domain-cell{border-left-color:#34d399;background:linear-gradient(90deg,rgba(52,211,153,.16),var(--bg2) 82%)}
+.dom-fin   .dwm-domain-cell{border-left-color:#60a5fa;background:linear-gradient(90deg,rgba(96,165,250,.16),var(--bg2) 82%)}
+.dom-hcm   .dwm-domain-cell{border-left-color:#f472b6;background:linear-gradient(90deg,rgba(244,114,182,.16),var(--bg2) 82%)}
+.dom-alm   .dwm-domain-cell{border-left-color:#fbbf24;background:linear-gradient(90deg,rgba(251,191,36,.16),var(--bg2) 82%)}
+.dom-proj  .dwm-domain-cell{border-left-color:#818cf8;background:linear-gradient(90deg,rgba(129,140,248,.16),var(--bg2) 82%)}
 /* Timeline header dots */
 .th-dot{display:inline-block;width:8px;height:4px;border-radius:2px;margin-right:.4rem;vertical-align:middle}
 
@@ -725,16 +722,16 @@ section.active{display:block}
   </div>
   <div class="nav-tabs">
     <button class="tab-btn active" data-tab="vision">01 · Vision</button>
-      <button class="tab-btn" data-tab="what-is-dw">02 · Digital Worker</button>
-    <button class="tab-btn" data-tab="digital-workers">03 · Digital Workers</button>
-    <button class="tab-btn" data-tab="architecture">04 · Architecture</button>
-    <button class="tab-btn" data-tab="platform-roadmap">05 · Platform</button>
-      <button class="tab-btn" data-tab="differentiation">06 · Differentiation</button>
-    <button class="tab-btn" data-tab="security">07 · Security</button>
-    <button class="tab-btn" data-tab="applications">08 · Applications</button>
-    <button class="tab-btn" data-tab="roadmap">09 · Roadmap</button>
-    <button class="tab-btn" data-tab="eap">10 · Early Adopters</button>
-    <button class="tab-btn" data-tab="customer-stories">11 · Customer Stories</button>
+    <button class="tab-btn" data-tab="what-is-dw">02 · Digital Worker Anatomy</button>
+    <button class="tab-btn" data-tab="architecture">03 · Platform Architecture</button>
+    <button class="tab-btn" data-tab="digital-workers">04 · Digital Workers Roadmap</button>
+    <button class="tab-btn" data-tab="platform-roadmap">05 · Platform Roadmap</button>
+    <button class="tab-btn" data-tab="security">06 · Security</button>
+    <button class="tab-btn" data-tab="applications">07 · Applications</button>
+    <button class="tab-btn" data-tab="roadmap">08 · Consolidated Roadmap</button>
+    <button class="tab-btn" data-tab="eap">09 · Early Adopters</button>
+    <button class="tab-btn" data-tab="customer-stories">10 · Customer Stories</button>
+    <button class="tab-btn" data-tab="differentiation">11 · Differentiation</button>
     <button class="tab-btn" data-tab="implementation">12 · Deployment</button>
   </div>
 </nav>
@@ -747,10 +744,9 @@ section.active{display:block}
 
   <!-- Hero -->
   <div class="vision-hero">
-    <div class="v-chip">Product Strategy · FY26–27*</div>
+    <div class="v-chip">Product Strategy · FY26–27</div>
     <h1 class="v-h1">From micro-process to<br><em>the headless agentic enterprise</em></h1>
     <p class="v-sub">IFS Loops captures individual tasks first, then entire workflows, then replaces the user interface entirely — one autonomous layer at a time.</p>
-    <div class="plat-disclaimer" style="margin:-1.5rem auto 2rem;padding-top:0;border-top:none;max-width:580px">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.</div>
   </div>
 
   <!-- Augment → Capture bar (above horizons) -->
@@ -765,7 +761,7 @@ section.active{display:block}
   <p class="sec-eyebrow">Three Horizons</p>
   <div class="horizon-row">
     <div class="hz-card hz1" id="hz1-card" onclick="toggleHz1Workers()" style="cursor:pointer">
-      <div class="hz-phase">Horizon 1 · Now</div>
+      <div class="hz-phase">Horizon 1</div>
       <div class="hz-name">Digital Workers</div>
       <div class="hz-desc">Discrete agents automating individual micro-processes. One worker, one focused role — dispatching, invoicing, knowledge retrieval.</div>
       <div class="hz-tags">
@@ -774,11 +770,11 @@ section.active{display:block}
         <span class="hz-tag">Supplier Invoicing Mgr</span>
       </div>
       <div class="hz-when">✦ Released Q1 FY26</div>
-      <div class="hz-expand-hint" id="hz1-hint">▾ See all workers</div>
+      <div class="hz-expand-hint" id="hz1-hint">▾ See example digital workers</div>
     </div>
     <div class="hz-arrow">→</div>
     <div class="hz-card hz2" id="hz2-card" style="cursor:pointer" onclick="toggleHz2Workflow()">
-      <div class="hz-phase">Horizon 2 · Building Now</div>
+      <div class="hz-phase">Horizon 2</div>
       <div class="hz-name">Agentic Workflows</div>
       <div class="hz-desc">Multiple workers orchestrated into end-to-end process coverage. One orchestrator coordinates the full lifecycle — intake, execution, closure, billing.</div>
       <div class="hz-tags">
@@ -787,11 +783,11 @@ section.active{display:block}
         <span class="hz-tag">Agentic ALM</span>
       </div>
       <div class="hz-when">✦ FY26–27 In development</div>
-      <div class="hz-expand-hint" id="hz2-hint">▾ See workflow</div>
+      <div class="hz-expand-hint" id="hz2-hint">▾ See sample workflow</div>
     </div>
     <div class="hz-arrow">→</div>
     <div class="hz-card hz3" id="hz3-card" onclick="toggleHz3App()" style="cursor:pointer">
-      <div class="hz-phase">Horizon 3 · Vision</div>
+      <div class="hz-phase">Horizon 3</div>
       <div class="hz-name">Headless Applications</div>
       <div class="hz-desc">Complete user interaction and workflow automation — headless applications that replace the UI and run the entire business process autonomously.</div>
       <div class="hz-tags">
@@ -800,7 +796,7 @@ section.active{display:block}
         <span class="hz-tag">Domain LLMs</span>
       </div>
       <div class="hz-when">✦ FY27+ Vision &amp; discovery</div>
-      <div class="hz-expand-hint" id="hz3-hint">▾ See application</div>
+      <div class="hz-expand-hint" id="hz3-hint">▾ See sample applications</div>
     </div>
   </div>
 
@@ -1011,7 +1007,7 @@ section.active{display:block}
 <section id="digital-workers">
 <div class="container">
   <div class="dw-page-header">
-    <h1 class="page-title">Digital Workers</h1>
+    <h1 class="page-title">Digital Workers Roadmap</h1>
     <p class="page-sub">Quarterly delivery of Digital Workers by business domain — FY26-27.</p>
     <div class="plat-disclaimer" style="margin-top:.5rem;padding-top:0;border-top:none">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.</div>
   </div>
@@ -1374,8 +1370,9 @@ section.active{display:block}
 <section id="platform-roadmap">
 <div class="container">
   <div class="plat-header">
-    <h1>FY26-27 Platform Roadmap</h1>
+    <h1>Platform Roadmap</h1>
     <p>Quarterly delivery across Agent Studio, Connectors &amp; Infrastructure. Click any area to see what&#8217;s shipping each quarter.</p>
+    <div class="plat-disclaimer" style="margin-top:.5rem;padding-top:0;border-top:none">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.</div>
   </div>
 
   <div class="plat-grid">
@@ -1410,7 +1407,7 @@ section.active{display:block}
   </div>
 
   <div class="plat-detail" id="plat-detail" style="display:none"></div>
-  <div class="plat-disclaimer">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.<br>** Priority of the modules are yet to be determined</div>
+  <div class="plat-disclaimer">** Priority of the modules are yet to be determined</div>
 </div>
 </section>
 
@@ -1722,7 +1719,7 @@ section.active{display:block}
 <section id="roadmap">
 <div class="container">
   <div class="rl-header">
-    <h1 class="page-title">Release Timeline</h1>
+    <h1 class="page-title">Consolidated Roadmap</h1>
     <p class="page-sub" style="margin-bottom:.5rem">Quarterly delivery across Platform, Digital Workers, Connectors &amp; Infrastructure — FY26-27.</p>
     <div class="plat-disclaimer" style="margin:0 0 1rem;padding-top:0;border-top:none">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.</div>
     <div style="display:inline-flex;align-items:center;gap:0.6rem;background:rgba(124,58,237,0.12);border:1px solid rgba(168,85,247,0.35);border-radius:8px;padding:0.45rem 1rem;margin-bottom:1.5rem">
@@ -3443,9 +3440,9 @@ function _closeAllHz() {
   var h1=document.getElementById('hz1-hint');
   var h2=document.getElementById('hz2-hint');
   var h3=document.getElementById('hz3-hint');
-  if(h1) h1.textContent = '\u25be See all workers';
-  if(h2) h2.textContent = '\u25be See workflow';
-  if(h3) h3.textContent = '\u25be See application';
+  if(h1) h1.textContent = '\u25be See example digital workers';
+  if(h2) h2.textContent = '\u25be See sample workflow';
+  if(h3) h3.textContent = '\u25be See sample applications';
   hzActive = null;
 }
 function toggleHz1Workers() {
@@ -3495,7 +3492,7 @@ const dwDomains = [
       {name:'Autonomous Service Operations',wid:null}
     ]
   }},
-  {id:'fsmcx', label:'FSM – CX', icon:'🎧', cls:'dom-fsm', workers:{
+  {id:'fsmcx', label:'FSM – CX', icon:'🎧', cls:'dom-fsmcx', workers:{
     'q1fy26':[
       {name:'Knowledge Manager (CX)',wid:'knowledge-manager'}
     ],
@@ -3567,10 +3564,10 @@ const dwDomains = [
 ];
 
 const dwTimeline = [
-  {id:'q1fy26', label:'Q1 FY26', sub:'Released',             color:'var(--green)'},
-  {id:'q3fy26', label:'Q3 FY26', sub:'15th September, 2026', color:'var(--amber)'},
-  {id:'q4fy26', label:'Q4 FY26', sub:'15th January, 2027',   color:'var(--tealL)'},
-  {id:'q1fy27', label:'Q1 FY27', sub:'15th April, 2027',     color:'var(--purpleL)'}
+  {id:'q1fy26', label:'Q1 FY26', sub:'',                     color:'#34d399', accent:'#34d399'},
+  {id:'q3fy26', label:'Q3 FY26', sub:'15th September, 2026', color:'#fbbf24', accent:'#fbbf24'},
+  {id:'q4fy26', label:'Q4 FY26', sub:'15th January, 2027',   color:'#38bdf8', accent:'#38bdf8'},
+  {id:'q1fy27', label:'Q1 FY27', sub:'15th April, 2027',     color:'#c084fc', accent:'#c084fc'}
 ];
 
 function renderDWMatrix() {
@@ -3582,7 +3579,7 @@ function renderDWMatrix() {
   dwTimeline.forEach(col=>{
     html += `<div class="dwm-th">
       <div class="dwm-th-label" style="color:${col.color}"><span class="th-dot" style="background:${col.color}"></span>${col.label}</div>
-      <div class="dwm-th-sub" style="color:${col.color}">${col.sub}</div>
+      ${col.sub ? `<div class="dwm-th-sub" style="color:${col.color}">${col.sub}</div>` : ''}
     </div>`;
   });
   // Domain rows
@@ -3595,7 +3592,7 @@ function renderDWMatrix() {
       const wids = dom.workers[col.id]||[];
       html += `<div class="dwm-cell ${dom.cls}">`;
       if(wids.length===0){
-        html += `<div style="height:2rem;color:var(--dimmest);font-size:.62rem;display:flex;align-items:center;justify-content:center">—</div>`;
+        html += `<div style="height:2rem;color:var(--dimmest);font-size:.62rem;display:flex;align-items:center;justify-content:center">·</div>`;
       } else {
         wids.forEach(entry=>{
           const wid = entry.wid;
@@ -3603,7 +3600,8 @@ function renderDWMatrix() {
           const displayName = entry.name;
           const role = w ? (w.persona||'').replace(/^Persona automated:\s*/i,'').split('/')[0].trim() : (entry.badge || ((col.id==='q4fy26'||col.id==='q1fy27') ? 'Details Coming Soon' : ''));
           const clickable = !!w;
-          html += `<div class="dwm-chip${clickable ? '' : ' dim-chip'}" style="${clickable ? '' : 'cursor:default'}" onclick="${clickable ? `openDW('${wid}')` : 'void(0)'}">
+          const chipStyle = `border:1px solid ${col.accent}55;border-left:3px solid ${col.accent};background:linear-gradient(90deg,${col.accent}12,var(--bg2));${clickable ? '' : 'cursor:default;opacity:.82'}`;
+          html += `<div class="dwm-chip${clickable ? '' : ' dim-chip'}" style="${chipStyle}" onclick="${clickable ? `openDW('${wid}')` : 'void(0)'}">
             <span class="dwm-chip-name">${displayName}</span>
             ${role ? `<span class="dwm-chip-role">${role}</span>` : ''}
           </div>`;
