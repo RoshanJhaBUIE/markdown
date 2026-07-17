@@ -140,7 +140,7 @@ section.active{display:block}
 /* ─── S2: DIGITAL WORKERS MATRIX ─── */
 .dw-page-header{padding:2.5rem 0 2rem}
 .dwm-wrap{overflow-x:auto;padding-bottom:1.5rem}
-.dwm-table{display:grid;grid-template-columns:130px repeat(3,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:760px}
+.dwm-table{display:grid;grid-template-columns:130px repeat(4,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:920px}
 /* Header row */
 .dwm-corner{background:var(--bg3);border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
 .dwm-th{padding:.85rem 1rem;background:var(--bg3);border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
@@ -2866,7 +2866,7 @@ function renderFSMMap() {
       <span class="orch-name">Service Operations Manager</span>
       <span class="orch-note">runs the P&amp;L, escalates only what needs a human</span>
     </div>
-    <div class="stage-row" style="grid-template-columns:repeat(6,1fr)">
+    <div class="stage-row" style="grid-template-columns:repeat(${fsmStages.length},1fr)">
       ${fsmStages.map(s=>`
         <div class="stage-col">
           <div class="stage-lbl">${s.num} · ${s.stage}</div>
@@ -2900,36 +2900,26 @@ function renderFSMMap() {
 }
 
 const fsmStages = [
-  {num:'01',stage:'CONTACT & TRIAGE',workers:[
-    {id:'triaging-assistant',name:'Triaging Assistant',role:'Work Intake & Classification',status:'coming'},
-    {id:'auto-pilot',name:'Auto Pilot',role:'Conversation Agent',status:'coming'}
-  ]},
-  {num:'02',stage:'AGENT AUGMENTATION',workers:[
+  {num:'01',stage:'AGENT AUGMENTATION',workers:[
     {id:'ai-agent-assist',name:'Agent Assist',role:'Agent Co-Pilot',status:'q3'}
   ]},
-  {num:'03',stage:'JOB PREPARATION',workers:[
+  {num:'02',stage:'JOB PREPARATION',workers:[
     {id:'service-planning-assistant',name:'Service Planning Asst',role:'Pre-Scheduling Intelligence',status:'avail'},
     {id:'dispatch-assistant',name:'Dispatch Assistant',role:'Real-Time Execution',status:'avail'},
     {id:'knowledge-manager',name:'Knowledge Manager',role:'Knowledge Layer (Field)',status:'avail'}
   ]},
-  {num:'04',stage:'SUPPLY CHAIN',workers:[
+  {num:'03',stage:'SUPPLY CHAIN',workers:[
     {id:'inventory-replenisher',name:'Inventory Replenisher',role:'Stock Intelligence',status:'avail'},
     {id:'supplier-order-manager',name:'Supplier Order Manager',role:'PO Chasing & Management',status:'avail'}
   ]},
-  {num:'05',stage:'DISPATCH & FIELD',workers:[
-    {id:'quality-analyst',name:'Quality Analyst',role:'QA & Compliance',status:'coming'},
-    {id:'service-closure-manager',name:'Service Closure Mgr',role:'Job Closure',status:'coming'}
-  ]},
-  {num:'06',stage:'QA & IMPROVEMENT',workers:[
+  {num:'04',stage:'QA & IMPROVEMENT',workers:[
     {id:'auto-qa',name:'Auto QA',role:'Quality Intelligence',status:'q3'},
-    {id:'cx-analyst',name:'CX Analyst',role:'Performance Intelligence',status:'q4'},
-    {id:'revenue-assurance-manager',name:'Revenue Assurance Mgr',role:'Billing Assurance',status:'coming'}
+    {id:'cx-analyst',name:'CX Analyst',role:'Performance Intelligence',status:'q4'}
   ]}
 ];
 
 const fsmSupport = [
   {label:'CX & FRONT OFFICE',workers:[
-    {id:'auto-pilot',name:'Auto Pilot'},
     {id:'cx-analyst',name:'CX Analyst'},
     {id:'knowledge-manager',name:'Knowledge Manager (CX)'}
   ]},
@@ -2939,7 +2929,6 @@ const fsmSupport = [
   ]},
   {label:'FIELD ENGINE',workers:[
     {id:'service-planning-assistant',name:'Service Planning Asst'},
-    {id:'dispatch-assistant',name:'Intelligent Routing'},
     {id:'service-planning-assistant',name:'Workforce Capacity Planner'}
   ]},
   {label:'SUPPLY CHAIN',workers:[
@@ -2948,9 +2937,7 @@ const fsmSupport = [
     {id:'inventory-replenisher',name:'Inventory Replenisher'}
   ]},
   {label:'COMMERCIAL',workers:[
-    {id:'revenue-assurance-manager',name:'Revenue Assurance Mgr'},
-    {id:'service-closure-manager',name:'Service Closure Mgr'},
-    {id:'revenue-assurance-manager',name:'Auto QA'}
+    {id:'auto-qa',name:'Auto QA'}
   ]}
 ];
 
@@ -2959,23 +2946,15 @@ function renderProcurementMap() {
     {num:'01',stage:'STRATEGIC SOURCING',workers:[
       {id:'sourcing-manager',name:'Sourcing Manager',role:'Supplier Discovery & RFQ',status:'q3'}
     ]},
-    {num:'02',stage:'SUPPLIER ONBOARDING',workers:[
-      {id:'vendor-onboarding-manager',name:'Vendor Onboarding Mgr',role:'Supplier Qualification',status:'coming'}
+    {num:'02',stage:'PR MANAGEMENT',workers:[
+      {id:'inventory-replenisher',name:'Inventory Replenisher',role:'MRP → PR Automation',status:'avail'}
     ]},
-    {num:'03',stage:'PR MANAGEMENT',workers:[
-      {id:'inventory-replenisher',name:'Inventory Replenisher',role:'MRP → PR Automation',status:'avail'},
-      {id:'procurement-manager',name:'Procurement Manager',role:'PR Approval & Routing',status:'coming'}
-    ]},
-    {num:'04',stage:'PO MANAGEMENT',workers:[
+    {num:'03',stage:'PO MANAGEMENT',workers:[
       {id:'supplier-order-manager',name:'Supplier Order Manager',role:'PO Creation & Chasing',status:'avail'},
       {id:'autonomous-replenishment',name:'Autonomous Replenishment',role:'AI-Driven Reorder',status:'q1'}
     ]},
-    {num:'05',stage:'RECEIPT & INSPECTION',workers:[
-      {id:'maintenance-execution-coordinator',name:'Maintenance Exec Coord',role:'Receipt & Work Order Link',status:'coming'}
-    ]},
-    {num:'06',stage:'AP INVOICE',workers:[
-      {id:'supplier-invoicing-manager',name:'Supplier Invoicing Mgr',role:'AP Invoice Processing',status:'avail'},
-      {id:'ap-finance-manager',name:'AP Finance Manager',role:'Payment & Reconciliation',status:'coming'}
+    {num:'04',stage:'AP INVOICE',workers:[
+      {id:'supplier-invoicing-manager',name:'Supplier Invoicing Mgr',role:'AP Invoice Processing',status:'avail'}
     ]}
   ];
   return `
@@ -2984,7 +2963,7 @@ function renderProcurementMap() {
       <span class="orch-name">Procurement Operations Manager</span>
       <span class="orch-note">end-to-end P2P orchestration, escalates exceptions only</span>
     </div>
-    <div class="stage-row" style="grid-template-columns:repeat(6,1fr)">
+    <div class="stage-row" style="grid-template-columns:repeat(${procStages.length},1fr)">
       ${procStages.map(s=>`
         <div class="stage-col">
           <div class="stage-lbl">${s.num} · ${s.stage}</div>
@@ -3052,28 +3031,7 @@ function renderALMMap() {
 function renderFinanceMap() {
   const finStages = [
     {num:'01',stage:'CAPTURE & VALIDATE',workers:[
-      {id:'account-reconciliation-mgr',name:'Account Reconciliation Mgr',role:'GL Entry Validation',status:'q3'},
-      {id:'validation-resolution',name:'Validation & Resolution',role:'Exception Handling',status:'coming'}
-    ]},
-    {num:'02',stage:'RECONCILE',workers:[
-      {id:'bank-reconciliation-mgr',name:'Bank Reconciliation Mgr',role:'Bank & Ledger Match',status:'coming'},
-      {id:'cash-application-mgr',name:'Cash Application Mgr',role:'Automated Cash Posting',status:'coming'}
-    ]},
-    {num:'03',stage:'CLOSE & ADJUST',workers:[
-      {id:'close-task-mgr',name:'Close Task Manager',role:'Period-End Close Orchestration',status:'coming'},
-      {id:'journal-entry-mgr',name:'Journal Entry Manager',role:'Automated Journal Entries',status:'coming'}
-    ]},
-    {num:'04',stage:'CONSOLIDATE',workers:[
-      {id:'intercompany-mgr',name:'Intercompany Manager',role:'Intercompany Elimination',status:'coming'},
-      {id:'close-insight-status',name:'Close Insight & Status',role:'Close Progress Reporting',status:'coming'}
-    ]},
-    {num:'05',stage:'REPORT & ANALYZE',workers:[
-      {id:'anomaly-controls',name:'Anomaly & Controls',role:'AI Risk Detection',status:'coming'},
-      {id:'cash-liquidity-mgr',name:'Cash & Liquidity Mgr',role:'Cash Flow Forecasting',status:'coming'}
-    ]},
-    {num:'06',stage:'COLLECT & CASH',workers:[
-      {id:'collections-credit',name:'Collections & Credit Mgr',role:'AR Collections Automation',status:'coming'},
-      {id:'customer-invoicing',name:'Customer Invoicing Mgr',role:'Billing & Invoice Generation',status:'coming'}
+      {id:'account-reconciliation-mgr',name:'Account Reconciliation Mgr',role:'GL Entry Validation',status:'q3'}
     ]}
   ];
   return `
@@ -3082,7 +3040,7 @@ function renderFinanceMap() {
       <span class="orch-name">Finance Operations Manager</span>
       <span class="orch-note">record-to-report, order-to-cash and treasury — one control tower</span>
     </div>
-    <div class="stage-row" style="grid-template-columns:repeat(6,1fr)">
+    <div class="stage-row" style="grid-template-columns:repeat(3,1fr)">
       ${finStages.map(s=>`
         <div class="stage-col">
           <div class="stage-lbl">${s.num} · ${s.stage}</div>
@@ -3104,45 +3062,11 @@ function renderFinanceMap() {
 }
 
 function renderPMMap() {
-  const pmStages = [
-    {num:'01',stage:'OPPORTUNITY & SETUP',workers:[
-      {id:'project-controls-mgr',name:'Project Controls Mgr',role:'Scope & Budget Control',status:'coming'}
-    ]},
-    {num:'02',stage:'PLAN & BUDGET',workers:[
-      {id:'project-controls-mgr',name:'Project Controls Mgr',role:'WBS & EAC Forecasting',status:'coming'}
-    ]},
-    {num:'03',stage:'EXECUTE & CONTROL',workers:[
-      {id:'reporting-status-mgr',name:'Reporting & Status Mgr',role:'Milestone & Progress Tracking',status:'coming'}
-    ]},
-    {num:'04',stage:'REPORT & STATUS',workers:[
-      {id:'billing-collections-mgr',name:'Billing & Collections Mgr',role:'Project Billing Automation',status:'coming'}
-    ]},
-    {num:'05',stage:'BILL & RECOGNIZE',workers:[
-      {id:'project-portfolio-mgr',name:'Project Portfolio Mgr',role:'Portfolio Health Dashboard',status:'coming'}
-    ]},
-    {num:'06',stage:'CLOSE & PORTFOLIO',workers:[
-      {id:'project-risk-mgr',name:'Project Risk Manager',role:'Risk Identification & Mitigation',status:'coming'}
-    ]}
-  ];
   return `
     <div class="orch-bar">
       <span class="orch-badge-chip">ORCHESTRATOR</span>
       <span class="orch-name">Project Operations Manager</span>
       <span class="orch-note">project P&amp;L, margin forecast and risk — surfaced automatically</span>
-    </div>
-    <div class="stage-row" style="grid-template-columns:repeat(6,1fr)">
-      ${pmStages.map(s=>`
-        <div class="stage-col">
-          <div class="stage-lbl">${s.num} · ${s.stage}</div>
-          ${s.workers.map(w=>`
-            <div class="wk-chip ${w.status}" onclick="openDW('${w.id}')" style="margin-bottom:${s.workers.length>1?'.4rem':'0'}">
-              <span class="wk-chip-name">${w.name}</span>
-              <span class="wk-chip-role">${w.role}</span>
-              <span class="wk-chip-badge ${w.status==='avail'?'cb-avail':w.status==='q3'?'cb-q3':w.status==='q4'?'cb-q4':w.status==='q1'?'cb-q1':'cb-wave'}">${w.status==='avail'?'Live':w.status==='q3'?'Q3 FY26 EA':w.status==='q4'?'Q4 FY26':w.status==='q1'?'Q1 FY27':'Next Wave'}</span>
-            </div>
-          `).join('')}
-        </div>
-      `).join('')}
     </div>
     <div style="margin:.8rem 0 .4rem;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)">BUNDLED SKILLS</div>
     <div style="display:flex;gap:.5rem;flex-wrap:wrap">
@@ -3294,49 +3218,35 @@ function renderDWPanel(wId) {
 // domain: 0=CustomerExp, 1=Planning&Dispatch, 2=SupplyChain
 
 const wfGridNodes = [
-  {name:'Auto Pilot',              seq:1,   grp:'cx', wid:null,                         stage:0, domain:0, isSkill:false},
-  {name:'Intelligent Routing',     seq:2,   grp:'cx', wid:null,                         stage:0, domain:0, isSkill:true},
-  {name:'Agent Assist',         seq:3,   grp:'cx', wid:'ai-agent-assist',            stage:1, domain:0, isSkill:false},
-  {name:'Knowledge Mgr (CX)',      seq:null,grp:'cx', wid:'knowledge-manager',          stage:1, domain:0, isSkill:false},
-  {name:'Triaging Assistant',      seq:4,   grp:'pd', wid:'triaging-assistant',         stage:2, domain:1, isSkill:false},
-  {name:'Service Planning Asst.',  seq:5,   grp:'pd', wid:'service-planning-assistant', stage:2, domain:1, isSkill:false},
-  {name:'Inventory Replenisher',   seq:6,   grp:'sc', wid:'inventory-replenisher',      stage:3, domain:2, isSkill:false},
-  {name:'Material Replenisher',    seq:null,grp:'sc', wid:null,                         stage:3, domain:2, isSkill:true},
-  {name:'Supplier Order Manager',  seq:7,   grp:'sc', wid:null,                         stage:3, domain:2, isSkill:false},
-  {name:'Dispatch Assistant',      seq:8,   grp:'pd', wid:'dispatch-assistant',         stage:4, domain:1, isSkill:false},
-  {name:'Knowledge Mgr (Field)',   seq:null,grp:'pd', wid:'knowledge-manager',          stage:4, domain:1, isSkill:false},
-  {name:'Auto QA',                 seq:9,   grp:'cx', wid:null,                         stage:5, domain:0, isSkill:false},
-  {name:'CX Analyst',              seq:10,  grp:'cx', wid:null,                         stage:5, domain:0, isSkill:false},
-  {name:'Quality Analyst',         seq:null,grp:'pd', wid:'quality-analyst',            stage:5, domain:1, isSkill:false},
-  {name:'Service Closure Manager', seq:11,  grp:'pd', wid:'service-closure-manager',    stage:5, domain:1, isSkill:false},
-  {name:'Revenue Assurance Mgr.',  seq:12,  grp:'pd', wid:'revenue-assurance-manager',  stage:5, domain:1, isSkill:false},
+  {name:'Agent Assist',            seq:1,   grp:'cx', wid:'ai-agent-assist',            stage:0, domain:0, isSkill:false},
+  {name:'Knowledge Mgr (CX)',      seq:null,grp:'cx', wid:'knowledge-manager',          stage:0, domain:0, isSkill:false},
+  {name:'Service Planning Asst.',  seq:2,   grp:'pd', wid:'service-planning-assistant', stage:1, domain:1, isSkill:false},
+  {name:'Inventory Replenisher',   seq:3,   grp:'sc', wid:'inventory-replenisher',      stage:2, domain:2, isSkill:false},
+  {name:'Material Replenisher',    seq:null,grp:'sc', wid:null,                         stage:2, domain:2, isSkill:true},
+  {name:'Supplier Order Manager',  seq:4,   grp:'sc', wid:null,                         stage:2, domain:2, isSkill:false},
+  {name:'Dispatch Assistant',      seq:5,   grp:'pd', wid:'dispatch-assistant',         stage:3, domain:1, isSkill:false},
+  {name:'Knowledge Mgr (Field)',   seq:null,grp:'pd', wid:'knowledge-manager',          stage:3, domain:1, isSkill:false},
+  {name:'Auto QA',                 seq:6,   grp:'cx', wid:null,                         stage:4, domain:0, isSkill:false},
+  {name:'CX Analyst',              seq:7,   grp:'cx', wid:null,                         stage:4, domain:0, isSkill:false},
 ];
 
-const wfRelease = {'Auto Pilot':'planned','Intelligent Routing':'planned','Agent Assist':'q3','Knowledge Mgr (CX)':'available','Triaging Assistant':'planned','Service Planning Asst.':'available','Inventory Replenisher':'available','Material Replenisher':'available','Supplier Order Manager':'available','Dispatch Assistant':'available','Knowledge Mgr (Field)':'available','Auto QA':'q3','CX Analyst':'q4','Quality Analyst':'planned','Service Closure Manager':'planned','Revenue Assurance Mgr.':'planned'};
+const wfRelease = {'Agent Assist':'q3','Knowledge Mgr (CX)':'available','Service Planning Asst.':'available','Inventory Replenisher':'available','Material Replenisher':'available','Supplier Order Manager':'available','Dispatch Assistant':'available','Knowledge Mgr (Field)':'available','Auto QA':'q3','CX Analyst':'q4'};
 
 // Connection sequence
 const wfConnections = [
-  [0, 1],   // Auto Pilot → Intelligent Routing
-  [1, 2],   // Intelligent Routing → Agent Assist
-  [2, 5],   // Agent Assist → Service Planning
-  [4, 5],   // Triaging Assistant → Service Planning
-  [5, 6],   // Service Planning → Inventory Replenisher
-  [6, 8],   // Inventory Replenisher → Supplier Order Manager
-  [8, 9],   // Supplier Order Manager → Dispatch Assistant
-  [9, 11],  // Dispatch Assistant → Auto QA
-  [11, 12], // Auto QA → CX Analyst
-  [14, 15], // Service Closure Manager → Revenue Assurance Manager
-  [15, 12], // Revenue Assurance Manager → CX Analyst
-  [12, 5],  // CX Analyst → Service Planning (feedback loop)
+  [0, 2],   // Agent Assist → Service Planning
+  [2, 3],   // Service Planning → Inventory Replenisher
+  [3, 5],   // Inventory Replenisher → Supplier Order Manager
+  [5, 6],   // Supplier Order Manager → Dispatch Assistant
+  [6, 8],   // Dispatch Assistant → Auto QA
+  [8, 9],   // Auto QA → CX Analyst
+  [9, 2],   // CX Analyst → Service Planning (feedback loop)
 ];
 
 const WF_LAYER={cx:{l:'Customer Experience',c:'#22d3ee'},pd:{l:'Planning & Dispatch',c:'#a855f7'},sc:{l:'Procurement',c:'#10b981'}};
 const wfDetail = {
-  'Auto Pilot':{grp:'cx',role:'Conversation Agent',desc:'First line of customer contact. Classifies intent, attempts self-service resolution, deflects up to 40% of contacts, and packages context for downstream handoff.',actions:['Receives inbound contact via chat, portal, or integrated channel','Classifies intent, urgency, and issue type using conversational AI','Attempts self-service resolution for known repeatable issues','Deflects up to 40% of contacts before agent or field involvement','Packages customer context and routes unresolved cases forward'],handoff:'Intelligent Routing',signal:'Classified intent + urgency score + customer tier'},
-  'Intelligent Routing':{grp:'cx',role:'Assignment Engine',desc:'Determines optimal routing based on SLA rules, customer tier, and issue complexity. Eliminates manual queue management.',actions:['Receives structured triage output from Auto Pilot','Applies SLA rules, customer tier, and complexity scoring','Routes to: self-service, agent handling, or field escalation','Eliminates manual queue management and misrouted contacts'],handoff:'Agent Assist',signal:'Routed case with SLA deadline + recommended skill category'},
   'Agent Assist':{grp:'cx',role:'Agent Co-Pilot',desc:'Works alongside human agents in real time. Surfaces knowledge, generates summaries, tracks sentiment, and prepares the structured work request for the planning layer.',actions:['Surfaces recommended resolution steps in real time','Retrieves knowledge via Knowledge Manager using case context','Generates case summaries to eliminate manual wrap-up','Flags sentiment shifts and urgency signals during live interaction','Prepares structured work order request for field escalation'],handoff:'Service Planning Asst.',signal:'Work order request: asset ID + fault type + SLA commitment + case summary'},
   'Knowledge Mgr (CX)':{grp:'cx',role:'Knowledge Layer (CX)',desc:'Delivers contextually ranked knowledge to agents in real time. Detects gaps and feeds learning signals back into the knowledge base.',actions:['Responds to agent queries with ranked, context-aware knowledge','Draws from manuals, historical cases, and asset documentation','Presents top 3 results with confidence scores and source citations','Detects queries that fall outside current knowledge base','Flags recurring gaps for Knowledge Owner review'],handoff:null,signal:null},
-  'Triaging Assistant':{grp:'pd',role:'Work Intake & Classification',desc:'Sits at the entry point of the planning layer. Receives incoming work requests from CX, classifies by type, urgency, and complexity, and routes each job to the correct preparation workflow.',actions:['Receives structured work requests from Agent Assist and CX channels','Classifies incoming work by job type, asset class, urgency, and complexity','Applies routing rules to direct jobs to the appropriate preparation workflow','Flags incomplete requests requiring human clarification before intake','Prioritises the incoming queue based on SLA risk and customer tier','Passes classified, prioritised work to Service Planning Assistant'],handoff:'Service Planning Asst.',signal:'Classified job: type + urgency tier + routing decision + intake priority'},
   'Service Planning Asst.':{grp:'pd',role:'Pre-Scheduling Intelligence',desc:'Ensures every job is execution-ready before scheduling. Enriches work orders, validates skills, confirms parts, and releases only fully prepared jobs into PSO.',actions:['Receives structured work request with full CX context intact','Enriches unstructured notes, attachments, and historical records','Validates required skills and certifications against workforce profiles','Predicts and confirms parts availability via Inventory Replenisher','Attaches service documentation from Knowledge Manager','Scores job readiness and releases to scheduling pipeline','Surfaces blockers to planners via Microsoft Teams before PSO'],handoff:'Inventory Replenisher',signal:'Parts demand signal: SKUs + quantities + required-by date'},
   'Inventory Replenisher':{grp:'sc',role:'Stock Intelligence',desc:'Validates parts availability across van stock, depot, and regional inventory. Triggers replenishment before scheduling is confirmed.',actions:['Receives parts demand signal from Service Planning Assistant','Checks van stock, depot stock, and regional inventory','Triggers replenishment requests or inter-depot transfers','Confirms availability before job is released to scheduling','Flags critical shortages to Supplier Order Manager'],handoff:'Supplier Order Manager',signal:'Shortage signal: unavailable SKUs + urgency flag + lead time'},
   'Material Replenisher':{grp:'sc',role:'Materials Coordination',desc:'Manages specialist material requirements outside standard parts inventory. Coordinates with procurement and confirms availability.',actions:['Manages materials outside standard parts inventory','Coordinates with procurement and depot operations','Confirms material availability and updates job readiness status'],handoff:null,signal:null},
@@ -3345,9 +3255,6 @@ const wfDetail = {
   'Knowledge Mgr (Field)':{grp:'pd',role:'Knowledge Layer (Field)',desc:'Delivers asset-specific, contextually ranked knowledge to field engineers in real time. Captures resolution signals as learning inputs.',actions:['Delivers contextual knowledge directly to the field engineer','Responds to image-based queries for real-time diagnostic support','Surfaces procedure documentation and historical repair records','Captures resolution signals from the field as learning inputs'],handoff:null,signal:null},
   'Auto QA':{grp:'cx',role:'Quality Intelligence',desc:'Automatically scores 100% of resolved cases. Surfaces coaching signals and critical failures without manual review overhead.',actions:['Automatically scores every resolved case against quality rubrics','Identifies agent performance gaps and knowledge failures','Generates targeted coaching signals for team leads','Surfaces critical rubric failures for immediate management attention','Feeds quality insights back into Knowledge Manager gap detection'],handoff:'CX Analyst',signal:'Quality scores + rubric results + coaching flags + knowledge failure signals'},
   'CX Analyst':{grp:'cx',role:'Performance Intelligence',desc:'Aggregates service journey data to surface systemic patterns, forecast demand, and feed continuous improvement signals back to the planning layer.',actions:['Aggregates case data, resolution patterns, and SLA outcomes','Identifies recurring faults and high-repeat-contact asset types','Produces demand forecasting signals for capacity planning','Feeds closed-loop intelligence back to Service Planning Assistant','Enables service managers to act on trends, not individual incidents'],handoff:'Service Planning Asst.',signal:'Demand and pattern intelligence fed back to planning layer (continuous loop)'},
-  'Quality Analyst':{grp:'pd',role:'Field Quality Intelligence',desc:'Provides quality assurance across the field execution layer. Evaluates job outcomes against planned scope and feeds structured improvement signals back into planning.',actions:['Scores completed field jobs against execution quality rubrics','Identifies gaps between planned job scope and actual resolution recorded','Detects patterns in repeat visits, parts failures, and skill mismatches','Generates engineer-level performance signals for workforce management','Flags systemic execution issues to Service Planning Assistant','Feeds field quality data to CX Analyst to close the improvement loop'],handoff:'Service Planning Asst.',signal:'Field quality signals: execution gaps + repeat visit patterns + skill mismatch data'},
-  'Service Closure Manager':{grp:'pd',role:'Closure & Debrief',desc:'Runs the close from sign-off to invoice trigger. Validates debrief completeness, reconciles parts and labour, captures customer sign-off, and hands a clean billing package forward.',actions:['Validates debrief completeness against job type and asset history','Nudges technician for missing parts, readings, or time entries','Reconciles parts and labour against the work order record','Orchestrates customer sign-off capture','Flags incomplete or disputed closures for human review','Passes a clean, complete billing package to Revenue Assurance Manager'],handoff:'Revenue Assurance Mgr.',signal:'Validated closure package: confirmed parts + labour + sign-off + billing-ready flag'},
-  'Revenue Assurance Mgr.':{grp:'pd',role:'Billing & Leakage Control',desc:'Bills every job accurately the moment closure is confirmed. Validates every invoice line against contract, rate card, and technician notes; catches under-charges, over-charges, and uncharged work.',actions:['Receives validated closure package from Service Closure Manager','Validates invoice lines against contract terms and rate cards','Detects under-billed labour, unrecorded parts, and overtime not captured','Detects over-charges that risk customer disputes','Generates invoice trigger for same-day billing','Flags ambiguous charges for human review before sending','Feeds leakage patterns back to Service Planning Assistant'],handoff:'CX Analyst',signal:'Billing intelligence: leakage patterns + invoice accuracy signals fed to improvement loop'},
 };
 
 const wfGrpStroke = {pd:'rgba(168,85,247,.8)', cx:'rgba(6,182,212,.8)', sc:'rgba(16,185,129,.8)'};
@@ -3363,7 +3270,7 @@ function renderHz2Workflow() {
   const H = 530;
   canvas.style.height = H + 'px';
 
-  const LW = 82, TH = 52, COLS = 6, ROWS = 3;
+  const LW = 82, TH = 52, COLS = 5, ROWS = 3;
   const CW = (W - LW) / COLS;
   const RH = (H - TH) / ROWS;
   const NW = Math.min(CW * 0.78, 102);
@@ -3386,7 +3293,7 @@ function renderHz2Workflow() {
   }
 
   // ── Background SVG ──
-  const stageNames = [['Contact &','Triage'],['Agent','Augmentation'],['Job','Preparation'],['Supply','Chain'],['Dispatch &','Field'],['QA &','Improvement']];
+  const stageNames = [['Agent','Augmentation'],['Job','Preparation'],['Supply','Chain'],['Dispatch &','Field'],['QA &','Improvement']];
   const domCfg = [
     {labels:['Customer','Experience'], color:'rgba(6,182,212,1)',  bg:'rgba(6,182,212,.05)'},
     {labels:['Planning &','Dispatch'],  color:'rgba(168,85,247,1)', bg:'rgba(168,85,247,.04)'},
@@ -3510,7 +3417,7 @@ function showWfDetail(name){
 function hideWfDetail(){ var el = document.getElementById('hz2-popover'); if(el) el.style.display='none'; }
 function renderHz2Overview(){
   var host = document.getElementById('hz2-view-overview'); if(!host) return;
-  var stages = [['Contact & Triage','cx'],['Agent Augmentation','cx'],['Job Preparation','pd'],['Supply Chain','sc'],['Dispatch & Field','pd'],['QA & Improvement','cx']];
+  var stages = [['Agent Augmentation','cx'],['Job Preparation','pd'],['Supply Chain','sc'],['Dispatch & Field','pd'],['QA & Improvement','cx']];
   var html = '';
   stages.forEach(function(st, si){
     var nodes = wfGridNodes.filter(function(n){ return n.stage === si && (!hz2Layer || wfRelease[n.name] === hz2Layer); });
@@ -3571,6 +3478,11 @@ function toggleHz3App() {
 // Domain matrix — each worker is {name, wid} where wid is the key in workers{} (null = no detail panel yet)
 const dwDomains = [
   {id:'fsm', label:'FSM', icon:'🔧', cls:'dom-fsm', workers:{
+    'q1fy26':[
+      {name:'Knowledge Manager',wid:'knowledge-manager'},
+      {name:'Dispatch Assistant',wid:'dispatch-assistant'},
+      {name:'Service Planning Assistant',wid:'service-planning-assistant'}
+    ],
     'q3fy26':[
       {name:'Job Analyst',wid:null}
     ],
@@ -3584,6 +3496,9 @@ const dwDomains = [
     ]
   }},
   {id:'fsmcx', label:'FSM – CX', icon:'🎧', cls:'dom-fsm', workers:{
+    'q1fy26':[
+      {name:'Knowledge Manager (CX)',wid:'knowledge-manager'}
+    ],
     'q3fy26':[
       {name:'Auto QA',wid:null},
       {name:'Agent Assist',wid:'ai-agent-assist'}
@@ -3594,6 +3509,11 @@ const dwDomains = [
     'q1fy27':[]
   }},
   {id:'scm', label:'SCM', icon:'📦', cls:'dom-proc', workers:{
+    'q1fy26':[
+      {name:'Supplier Invoicing Manager',wid:'supplier-invoicing-manager'},
+      {name:'Supplier Order Manager',wid:null},
+      {name:'Inventory Replenisher',wid:'inventory-replenisher'}
+    ],
     'q3fy26':[
       {name:'Sourcing Manager',wid:null}
     ],
@@ -3621,6 +3541,9 @@ const dwDomains = [
     'q1fy27':[]
   }},
   {id:'eam', label:'EAM', icon:'🏭', cls:'dom-alm', workers:{
+    'q1fy26':[
+      {name:'Material Replenisher',wid:null}
+    ],
     'q3fy26':[
       {name:'Closeout & Improvement Manager',wid:null}
     ],
@@ -3644,6 +3567,7 @@ const dwDomains = [
 ];
 
 const dwTimeline = [
+  {id:'q1fy26', label:'Q1 FY26', sub:'Released',             color:'var(--green)'},
   {id:'q3fy26', label:'Q3 FY26', sub:'15th September, 2026', color:'var(--amber)'},
   {id:'q4fy26', label:'Q4 FY26', sub:'15th January, 2027',   color:'var(--tealL)'},
   {id:'q1fy27', label:'Q1 FY27', sub:'15th April, 2027',     color:'var(--purpleL)'}
@@ -3706,8 +3630,7 @@ renderDWMatrix();
     {
       label:'Customer Experience', cls:'ri-grp-cx', color:'var(--teal)',
       workers:[
-        {name:'Auto Pilot',        wid:null,                 desc:'Fully automated customer conversation agent'},
-        {name:'Agent Assist',   wid:'ai-agent-assist',    desc:'Agent co-pilot for service desk'},
+        {name:'Agent Assist',      wid:'ai-agent-assist',    desc:'Agent co-pilot for service desk'},
         {name:'Knowledge Manager', wid:'knowledge-manager',  desc:'Field knowledge delivery at point of work'},
         {name:'Auto QA',           wid:null,                 desc:'Automated quality intelligence at scale'},
         {name:'CX Analyst',        wid:null,                 desc:'Customer experience performance intelligence'}
@@ -3716,14 +3639,9 @@ renderDWMatrix();
     {
       label:'Planning & Dispatch', cls:'ri-grp-pd', color:'var(--purpleL)',
       workers:[
-        {name:'Intelligent Routing',         wid:null,                          desc:'AI-driven job routing and optimisation'},
-        {name:'Triaging Assistant',          wid:'triaging-assistant',          desc:'Work intake & classification'},
         {name:'Service Planning Assistant',  wid:'service-planning-assistant',  desc:'Work order enrichment and PSO pipeline'},
         {name:'Dispatch Assistant',          wid:'dispatch-assistant',          desc:'Real-time schedule disruption management'},
-        {name:'Knowledge Manager',           wid:'knowledge-manager',           desc:'Field knowledge delivery at point of work'},
-        {name:'Quality Analyst',             wid:'quality-analyst',             desc:'QA review and compliance scoring'},
-        {name:'Service Closure Manager',     wid:'service-closure-manager',     desc:'Job closure and documentation'},
-        {name:'Revenue Assurance Manager',   wid:'revenue-assurance-manager',   desc:'Invoice accuracy and billing assurance'}
+        {name:'Knowledge Manager',           wid:'knowledge-manager',           desc:'Field knowledge delivery at point of work'}
       ]
     },
     {
