@@ -1011,7 +1011,7 @@ section.active{display:block}
 <section id="digital-workers">
 <div class="container">
   <div class="dw-page-header">
-    <h1 class="page-title">Digital Workers*</h1>
+    <h1 class="page-title">Digital Workers</h1>
     <p class="page-sub">Quarterly delivery of Digital Workers by business domain — FY26-27.</p>
     <div class="plat-disclaimer" style="margin-top:.5rem;padding-top:0;border-top:none">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.</div>
   </div>
@@ -1657,7 +1657,7 @@ section.active{display:block}
 <section id="applications">
 <div class="container">
   <div class="apps-header">
-    <h1 class="page-title">Agentic Applications*</h1>
+    <h1 class="page-title">Agentic Applications</h1>
     <p class="page-sub">Five end-to-end agentic applications — each an orchestrated workforce of digital workers covering a complete business process. Click any application to explore.</p>
     <div class="plat-disclaimer" style="margin-top:.5rem;padding-top:0;border-top:none">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.</div>
   </div>
@@ -1722,7 +1722,7 @@ section.active{display:block}
 <section id="roadmap">
 <div class="container">
   <div class="rl-header">
-    <h1 class="page-title">Release Timeline*</h1>
+    <h1 class="page-title">Release Timeline</h1>
     <p class="page-sub" style="margin-bottom:.5rem">Quarterly delivery across Platform, Digital Workers, Connectors &amp; Infrastructure — FY26-27.</p>
     <div class="plat-disclaimer" style="margin:0 0 1rem;padding-top:0;border-top:none">* Items planned for Q4 FY26 and beyond reflect indicative timelines &amp; scope and are subject to change.</div>
     <div style="display:inline-flex;align-items:center;gap:0.6rem;background:rgba(124,58,237,0.12);border:1px solid rgba(168,85,247,0.35);border-radius:8px;padding:0.45rem 1rem;margin-bottom:1.5rem">
@@ -3601,7 +3601,7 @@ function renderDWMatrix() {
           const wid = entry.wid;
           const w = wid ? workers[wid] : null;
           const displayName = entry.name;
-          const role = w ? (w.persona||'').replace(/^Persona automated:\s*/i,'').split('/')[0].trim() : (entry.badge||'');
+          const role = w ? (w.persona||'').replace(/^Persona automated:\s*/i,'').split('/')[0].trim() : (entry.badge || ((col.id==='q4fy26'||col.id==='q1fy27') ? 'Details Coming Soon' : ''));
           const clickable = !!w;
           html += `<div class="dwm-chip${clickable ? '' : ' dim-chip'}" style="${clickable ? '' : 'cursor:default'}" onclick="${clickable ? `openDW('${wid}')` : 'void(0)'}">
             <span class="dwm-chip-name">${displayName}</span>
